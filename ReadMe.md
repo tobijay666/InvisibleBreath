@@ -1,35 +1,65 @@
-# Invisible Breath by Anton Jayakody GSCOMP205
+# Global PM10 Air Quality Analysis (2010-2022)
 
-## Commands to run
+## 1. Overview
 
-1. Activating the venv
+This project conducts a comprehensive spatio-temporal and statistical analysis of global Particulate Matter (PM10) concentrations from 2010 to 2022. Utilizing the World Health Organization (WHO) Air Quality Database, the analysis aims to visualize global air quality trends, identify significant pollution hotspots and coldspots, and quantify temporal changes across different continents. The insights derived are crucial for understanding global air pollution patterns and informing environmental policy and public health strategies.
 
-```
-.\gis\Scripts\Activate.ps1
-```
+## 2. Features & Analysis Performed
 
-** VENV SETUP:
-pip install jupyter pandas geopandas pyarrow imageio matplotlib shapely fiona pyproj rtree mapclassify
-**
+- **Spatio-Temporal Visualization:** Dynamic animated maps illustrating yearly changes in global PM10 concentrations from 2010 to 2022.
+- **Global Spatial Pattern Analysis (Hotspot & Coldspot Detection):** Application of Getis-Ord Gi\* statistics to identify statistically significant clusters of high (hotspots) and low (coldspots) PM10 concentrations.
+- **Cross-Regional Comparative Trend Analysis:** Visual comparison of average PM10 concentration trends across major continents.
+- **Quantifying Temporal Trends:** Statistical analysis using linear regression to determine the rate and significance of PM10 changes for each continent.
 
-2. jupyter NoteBook Set Up
+## 3. Data Sources
 
-```
-jupyter notebook
-```
+- **PM10 Concentration Data:** World Health Organization (WHO) Air Quality Database.
+- **Global Administrative Boundaries:** Natural Earth data.
 
-|     | who_region | iso3 | country_name | city         | year | version                                    | pm10_concentration | pm25_concentration | no2_concentration | pm10_tempcov | no2_tempcov | type_of_stations                 | reference | web_link | population | population_source          | latitude  | longitude | who_ms | geometry                  |
-| --- | ---------- | ---- | ------------ | ------------ | ---- | ------------------------------------------ | ------------------ | ------------------ | ----------------- | ------------ | ----------- | -------------------------------- | --------- | -------- | ---------- | -------------------------- | --------- | --------- | ------ | ------------------------- |
-| 0   | 4_Eur      | ESP  | Spain        | A Coruna/ESP | 2013 | V4.0 (2018), V4.0 (2018), V4.0 (2018), ... | 23.238             | 11.491             | 28.841            | 87.0         | 93.0        | Urban, Urban, Suburban           | NaN       | NaN      | 246146.0   | manual, manual, manual,... | 43.3679   | -8.418571 | 1.0    | POINT (-8.41857 43.3679)  |
-| 1   | 4_Eur      | ESP  | Spain        | A Coruna/ESP | 2014 | V6.0 (2023), V6.0 (2023), V6.0 (2023)      | 27.476             | 15.878             | 19.575            | 96.0         | 95.0        | Urban, Urban, Suburban           | NaN       | NaN      | 247604.0   | NaN                        | 43.368033 | -8.418233 | 1.0    | POINT (-8.41823 43.36803) |
-| 2   | 4_Eur      | ESP  | Spain        | A Coruna/ESP | 2015 | V6.0 (2023), V6.0 (2023), V6.0 (2023), ... | 25.515             | 14.004             | 22.731            | 98.0         | 98.0        | Urban, Urban, Suburban, Suburban | NaN       | NaN      | 247604.0   | NaN                        | 43.370375 | -8.4229   | 1.0    | POINT (-8.4229 43.37038)  |
-| 3   | 4_Eur      | ESP  | Spain        | A Coruna/ESP | 2016 | V6.0 (2023), V6.0 (2023), V6.0 (2023), ... | 23.057             | 13.160             | 20.204            | 98.0         | 98.0        | Urban, Urban, Suburban, Suburban | NaN       | NaN      | 247604.0   | NaN                        | 43.370375 | -8.4229   | 1.0    | POINT (-8.4229 43.37038)  |
-| 4   | 4_Eur      | ESP  | Spain        | A Coruna/ESP | 2017 | V6.0 (2023), V6.0 (2023), V6.0 (2023), ... | 26.849             | 14.114             | 21.543            | 97.0         | 98.0        | Urban, Urban, Suburban, Suburban | NaN       | NaN      | 247604.0   | NaN                        | 43.370375 | -8.4229   | 1.0    | POINT (-8.4229 43.37038)  |
+## 4. Methodology & Tools
 
-|     | year | CONTINENT     | pm10_concentration |
-| --- | ---- | ------------- | ------------------ |
-| 0   | 2010 | Africa        | 66.463455          |
-| 1   | 2010 | Asia          | 179.332368         |
-| 2   | 2010 | Europe        | 25.915942          |
-| 3   | 2010 | North America | 22.739640          |
-| 4   | 2010 | Oceania       | 19.053400          |
+The analysis is conducted primarily in Python, leveraging a suite of specialized libraries:
+
+- **Pandas:** For robust data manipulation and cleaning.
+- **GeoPandas:** For handling geospatial data, including shapefiles and spatial operations.
+- **PySAL (Python Spatial Analysis Library):** Specifically `libpysal` for spatial weights matrix creation (K-Nearest Neighbors) and `esda` for hotspot analysis (Getis-Ord Gi\*).
+- **Matplotlib:** For creating static and dynamic visualizations.
+- **Imageio:** For compiling individual map frames into animated GIFs.
+- **Scipy.stats:** For statistical trend analysis (linear regression).
+
+## 5. Key Results Summary
+
+- **Global Trends:** While overall global PM10 levels show signs of improvement, significant regional disparities persist.
+- **Hotspots:** Persistent and prominent PM10 hotspots were identified across East Asia, parts of the Middle East, and Eastern Europe.
+- **Coldspots & Improvement:** North America and Oceania consistently exhibited low PM10 concentrations and showed statistically significant decreasing trends.
+- **Asia's Challenge:** Despite a visually apparent decline, PM10 trends in Asia were not statistically significant in a linear model, indicating high variability and ongoing challenges in air quality management.
+
+## 6. How to Run the Analysis
+
+To replicate and explore this analysis, follow these steps:
+
+### Prerequisites
+
+- Python 3.8+
+- Jupyter Notebook (or Jupyter Lab)
+
+### Setup
+
+1.  **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/tobijay666/InvisibleBreath.git
+    cd InvisibleBreath
+    ```
+
+2.  **Create a Virtual Environment (Recommended):**
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: `venv\Scripts\activate`
+    ```
+
+3.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
